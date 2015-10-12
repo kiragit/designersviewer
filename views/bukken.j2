@@ -1,0 +1,16 @@
+{% extends "base.j2" %}
+
+{% block content %}
+    {% for bukken in bukkens %}
+        <p><img height="82" height="82" src={{bukken.photo}} align="top" /></p>
+        <p>
+            <ul class="list-group">
+                <li class="list-group-item"><a href={{ bukken.link }}>{{ bukken.name }}</a></li>
+                <li class="list-group-item">コメント:{{bukken.info}}</li>
+                <li class="list-group-item">家賃:{{bukken.yatin}}</li>
+                <li class="list-group-item">最寄駅:{{bukken.eki}}</li>
+                <li class="list-group-item">間取り:{{bukken.madori}}</li>
+            </ul>
+        </p>
+    {% endfor %}
+{% endblock %}
