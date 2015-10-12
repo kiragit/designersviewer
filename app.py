@@ -25,8 +25,11 @@ def get_linea_pages():
 def get_a_linea_page(url):
     SITE_ROOT='https://www.linea.co.jp'
     bukkens = []
-    driver = webdriver.PhantomJS(executable_path='/Applications/phantomjs-1.9.2-macosx/bin/phantomjs')
-    #driver = webdriver.PhantomJS()
+    #開発環境と本番環境でPhantomJSの呼び出し方が異なるため、ホスト名で振り分け
+    if os.uname()[1] == "kira-no-MacBook-Air.local":
+        driver = webdriver.PhantomJS(executable_path='/Applications/phantomjs-1.9.2-macosx/bin/phantomjs')
+    else:    
+        driver = webdriver.PhantomJS()
     driver.get(url)
     root = lxml.html.fromstring(driver.page_source)
     links = root.xpath("//div[@class='article-box clearfix']")
