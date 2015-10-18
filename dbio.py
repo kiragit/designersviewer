@@ -9,7 +9,6 @@ from sqlalchemy.orm import mapper
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import exc #例外処理
 import os
-import urlparse
 
 #from sqlalchemy.ext.declarative import declarative_base
 # SQLAlchemyお決まりの処理
@@ -18,7 +17,7 @@ import urlparse
 if os.uname()[1] == "kira-no-MacBook-Air.local":
     url = 'postgresql://pybv:pybv@localhost:5432/pybv_db'
 else:    
-    urlparse.uses_netloc.append("postgres")
+    #urlparse.uses_netloc.append("postgres")
     url = urlparse.urlparse(os.environ["DATABASE_URL"])
 engine = create_engine(url, echo=False)     
      
