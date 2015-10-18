@@ -17,8 +17,7 @@ import os
 if os.uname()[1] == "kira-no-MacBook-Air.local":
     url = 'postgresql://pybv:pybv@localhost:5432/pybv_db'
 else:    
-    #urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    url = os.environ["DATABASE_URL"]
 engine = create_engine(url, echo=False)     
      
 # テーブル作成
