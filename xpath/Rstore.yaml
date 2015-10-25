@@ -1,0 +1,50 @@
+# dict
+website: "R-STORE"
+websiteURL: "http://www.r-store.jp/"
+GROUP:
+  IGNORE: "NONE"
+  PROTOCOL: "cssselect"
+  COMMAND: "#mainContentsArea"
+  SELECTOR: ""
+  UNIT:
+    PROTOCOL: "cssselect"
+    COMMAND: ".listBox"
+    SELECTOR: ""
+    IGNORE: "NONE"
+    UNITITEMS:
+      IGNORE: "NONE"
+      photoURL:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxL>ul>li>img"
+          SELECTOR: ".attrib['src']"
+          HEADER: ""
+      yatin:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxRyokin"
+          SELECTOR: "all"
+          HEADER: ""
+      eki:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxEki"
+          SELECTOR: ".text"
+          HEADER: ""
+      madori:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxHirosa"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      info:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxR>h2"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      name:
+          PROTOCOL: "cssselect"
+          COMMAND: ".listBoxR>h2"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      link:
+          PROTOCOL: "cssselect"
+          COMMAND: "a.clearfix"
+          SELECTOR: "[0].attrib['href']"
+          HEADER: "http://www.r-store.jp"

@@ -1,0 +1,50 @@
+# dict
+website: "good room"
+websiteURL: "http://www.r-store.jp/"
+GROUP:
+  IGNORE: "NONE"
+  PROTOCOL: "cssselect"
+  COMMAND: "#res_list"
+  SELECTOR: ""
+  UNIT:
+    PROTOCOL: "cssselect"
+    COMMAND: "#res_list>li"
+    SELECTOR: ""
+    IGNORE: "NONE"
+    UNITITEMS:
+      IGNORE: "NONE"
+      photoURL:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_left>p>a>img"
+          SELECTOR: ".attrib['src']"
+          HEADER: "http:"
+      yatin:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_info"
+          SELECTOR: "[0].text.strip().split()[1]"
+          HEADER: ""
+      eki:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_name>a>span"
+          SELECTOR: ".text"
+          HEADER: ""
+      madori:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_info"
+          SELECTOR: "[0].text.strip().split()[2]"
+          HEADER: ""
+      info:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_txt"
+          SELECTOR: ".text.strip()"
+          HEADER: ""
+      name:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_name>a"
+          SELECTOR: "all"
+          HEADER: ""
+      link:
+          PROTOCOL: "cssselect"
+          COMMAND: ".res_name>a"
+          SELECTOR: "[0].attrib['href']"
+          HEADER: "http://www.goodrooms.jp/"

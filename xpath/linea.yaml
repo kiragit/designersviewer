@@ -1,0 +1,50 @@
+# dict
+website: "linea"
+websiteURL: "http://www.linea.co.jp"
+GROUP:
+  IGNORE: "NONE"
+  PROTOCOL: "cssselect"
+  COMMAND: ".main.clearfix"
+  SELECTOR: ""
+  UNIT:
+    PROTOCOL: "cssselect"
+    COMMAND: ".article-box.clearfix"
+    SELECTOR: ""
+    IGNORE: "NONE"
+    UNITITEMS:
+      IGNORE: "NONE"
+      photoURL:
+          PROTOCOL: "cssselect"
+          COMMAND: ".article-photo.clearfix>p>a>img"
+          SELECTOR: ".attrib['src']"
+          HEADER: "http://www.linea.co.jp"
+      yatin:
+          PROTOCOL: "cssselect"
+          COMMAND: ".price"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      eki:
+          PROTOCOL: "cssselect"
+          COMMAND: ".area"
+          SELECTOR: ".text"
+          HEADER: ""
+      madori:
+          PROTOCOL: "cssselect"
+          COMMAND: ".layout"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      info:
+          PROTOCOL: "cssselect"
+          COMMAND: ".info-txt"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      name:
+          PROTOCOL: "cssselect"
+          COMMAND: ".article-name>a"
+          SELECTOR: "[0].text"
+          HEADER: ""
+      link:
+          PROTOCOL: "cssselect"
+          COMMAND: ".article-name>a"
+          SELECTOR: "[0].attrib['href']"
+          HEADER: ""

@@ -2,10 +2,15 @@
 
 {% block content %}
     {% for bukken in bukkens %}
-        <p><img height="82" height="82" src={{bukken.photoURL}} align="top" /></p>
+        {% set photolist = bukken.photoURL.split(',') %}
+            <p>
+            {% for photo in photolist %}
+                <img height="82" height="82" src={{photo}} />
+            {% endfor %}
+            </p>
         <p>
             <ul class="list-group">
-                <li class="list-group-item"><a href={{ bukken.link }}>{{ bukken.name }}</a></li>
+                <li class="list-group-item"><a href={{ bukken.link }} target=”_blank” >{{ bukken.name }}</a></li>
                 <li class="list-group-item">コメント:{{bukken.info}}</li>
                 <li class="list-group-item">家賃:{{bukken.yatin}}</li>
                 <li class="list-group-item">最寄駅:{{bukken.eki}}</li>
