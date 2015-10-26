@@ -114,7 +114,7 @@ class dbiomaker():
         try:
             print("--try--")
             print(select["website"])
-            bukkens = session.query(BukkenInfo).filter(BukkenInfo.website==select["website"],BukkenInfo.madori.like('%'+select['madori']+'%')).all() 
+            bukkens = session.query(BukkenInfo).filter(BukkenInfo.website==select["website"],BukkenInfo.madori.like('%'+select['madori']+'%')).all()
             #for bukken in bukkens:
             #    print(bukken)
         except exc.SQLAlchemyError as e:

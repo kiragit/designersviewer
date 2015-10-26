@@ -59,7 +59,7 @@ def update():
     f = open("xpath/"+"goodroom.yaml", 'r')
     yaml = yamllib.load(f)  # 読み込む
     f.close()
-    URL_GOODROOM_PRE = 'http://www.goodrooms.jp/sch/sch_list.php?page_num='
+    URL_GOODROOM_PRE = 'http://www.goodrooms.jp/sch/sch_list.php?page_num=2&sort=&=&sch_flg=&item=0&price=0-99999&b_area=0-99999&eki_walk=0&chikunen=0&rs_price=&madori=0&no_r_price=0&no_s_price=0&cond_money_combo=0&kodawari=0&setsubi_cd=0&g_point1=0&g_point2=0&g_point3=0&g_point4=0&g_point5=0&categoly=0&state=&update=&create_date=&pref_cd=0&word=&canonical_url=/sch/sch_list.php?page_num='
     URL_GOODROOM_RSTORE = ''
     #  物件サイトから情報を取得
     for i in range(1,2):

@@ -4,6 +4,7 @@ from bottle import route, run, request
 from bottle import TEMPLATE_PATH, jinja2_template as template
 import scraping
 import view
+import dbio
 import os
 
 #templateパスの追加
@@ -13,7 +14,12 @@ TEMPLATE_PATH.append("./views")
 def update():
     scraping.update()
     return template('save.j2')
-    
+
+@route('/delete/:website')
+def delete(website):
+    dbio.dbiomaker.deleteBySite(website)
+    return template('save.j2')
+
 @route('/')
 def index():
     return template('index.j2')

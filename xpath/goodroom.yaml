@@ -1,10 +1,10 @@
 # dict
-website: "good room"
+website: "GoodRoom"
 websiteURL: "http://www.r-store.jp/"
 GROUP:
   IGNORE: "NONE"
   PROTOCOL: "cssselect"
-  COMMAND: "#res_list"
+  COMMAND: "#page_contents>form"
   SELECTOR: ""
   UNIT:
     PROTOCOL: "cssselect"
