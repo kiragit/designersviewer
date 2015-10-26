@@ -7,9 +7,9 @@ Created on Sun Oct 18 11:12:07 2015
 from sqlalchemy import Table,Column,Integer,String,MetaData,create_engine
 from sqlalchemy.orm import mapper
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import and_
 from sqlalchemy import exc #例外処理
 import os
+import re
 
 #from sqlalchemy.ext.declarative import declarative_base
 # SQLAlchemyお決まりの処理
@@ -42,7 +42,9 @@ bukken_info_table = Table("bukken_info",metadata,
     #間取り
     Column("madori",String),
     #コメント
-    Column("info",String)
+    Column("info",String),
+    #検索用家賃
+    Column("yatin_select",Integer)
 )
 metadata.create_all(engine)
 
@@ -67,7 +69,9 @@ class BukkenInfo():
         self.madori=madori
         #コメント
         self.info=info
-    
+        #検索用家賃
+        self.yatin_select=re.findall(r'[0-9]+', yatin.replace(',', ''))[0]
+        
     def __repr__(self):
         return "<BukkenInfo(%s,%s)>" % (self.website,self.name)
 
@@ -113,8 +117,17 @@ class dbiomaker():
         bukkens=[]
         try:
             print("--try--")
-            print(select["website"])
-            bukkens = session.query(BukkenInfo).filter(BukkenInfo.website==select["website"],BukkenInfo.madori.like('%'+select['madori']+'%')).all()
+            p=session.query(BukkenInfo)
+            if select["website"] != 'ALL':
+                p=p.filter(BukkenInfo.website==select["website"])
+            if select["eki"] != 'ALL':
+                p=p.filter(BukkenInfo.eki.like('%'+select['eki']+'%'))
+            if select["madori"] != 'ALL':
+                p=p.filter(BukkenInfo.madori.like('%'+select['madori']+'%'))
+            if select["yatin"] != 'ALL':
+                yatin=int(select["yatin"])
+                p=p.filter(BukkenInfo.yatin_select.between(yatin,yatin+19999))
+            bukkens = p.all()
             #for bukken in bukkens:
             #    print(bukken)
         except exc.SQLAlchemyError as e:

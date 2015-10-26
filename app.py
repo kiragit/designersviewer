@@ -4,7 +4,6 @@ from bottle import route, run, request
 from bottle import TEMPLATE_PATH, jinja2_template as template
 import scraping
 import view
-import dbio
 import os
 
 #templateパスの追加
@@ -13,11 +12,6 @@ TEMPLATE_PATH.append("./views")
 @route('/update')
 def update():
     scraping.update()
-    return template('save.j2')
-
-@route('/delete/:website')
-def delete(website):
-    dbio.dbiomaker.deleteBySite(website)
     return template('save.j2')
 
 @route('/')
@@ -30,11 +24,7 @@ def search():
     price = request.forms.get('price')
     madori = request.forms.get('madori')
     eki = request.forms.get('eki')
-    print(website)
-    print(price)
-    print(madori)
-    print(eki)
-    select={"website":website,"price":price,"madori":madori,"eki":eki}
+    select={"website":website,"yatin":price,"madori":madori,"eki":eki}
     bukkens=view.viewSelect(select)
     return template('bukken.j2', bukkens=bukkens)
 
