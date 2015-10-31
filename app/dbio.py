@@ -15,7 +15,7 @@ import re
 # SQLAlchemyお決まりの処理
 #Base = declarative_base()
 
-if os.environ["DATABASE_URL"] is not "":
+if "DATABASE_URL" in os.environ.keys():
     url = os.environ["DATABASE_URL"]
 elif os.uname()[1] == "kira-no-MacBook-Air.local":
     url = 'postgresql://pybv:pybv@localhost:5432/pybv_db'
