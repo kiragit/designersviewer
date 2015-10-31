@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from bottle import route, run, request
+from bottle import route, run, request, auth_basic
+import hashlib
+import base64
 from bottle import TEMPLATE_PATH, jinja2_template as template
 import scraping
 import view
@@ -8,8 +10,27 @@ import os
 
 #templateパスの追加
 TEMPLATE_PATH.append("../views")
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__)) #このスクリプトがあるフォルダの絶対パス
+
+def check(username, password):
+    #サーバ側設定値の読み取り
+    f = open(ROOT_PATH + '/../config/.htpasswd', 'r')
+    auth_check_word = f.readline() # ファイル終端まで全て読んだデータを返す
+    f.close()
+    #ログイン情報の読み込み
+    hs= hashlib.sha1()
+    hs.update(password.encode("utf-8"))
+    login_word = username + ":{SHA}" + str(base64.b64encode(hs.digest()).decode("utf-8"))
+    return auth_check_word.strip() ==login_word.strip() 
+
+
+@route("/manage")
+@auth_basic(check)
+def manage():
+    return template('manage.j2')
 
 @route('/update')
+@auth_basic(check)
 def update():
     scraping.update()
     return template('save.j2')
