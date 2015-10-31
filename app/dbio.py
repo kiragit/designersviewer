@@ -15,10 +15,12 @@ import re
 # SQLAlchemyお決まりの処理
 #Base = declarative_base()
 
-if os.uname()[1] == "kira-no-MacBook-Air.local":
-    url = 'postgresql://pybv:pybv@localhost:5432/pybv_db'
-else:    
+if os.environ["DATABASE_URL"] is not "":
     url = os.environ["DATABASE_URL"]
+elif os.uname()[1] == "kira-no-MacBook-Air.local":
+    url = 'postgresql://pybv:pybv@localhost:5432/pybv_db'
+else:
+    url = 'postgresql://postgres@localhost:5432/pybv_db'
 engine = create_engine(url, echo=False)     
      
 # テーブル作成
