@@ -9,3 +9,5 @@ addons:
       postgresql: "9.4"
       services:
             - postgresql
+before_script:
+      - psql -c 'create database pybv_db;' -U postgres
