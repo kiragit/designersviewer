@@ -1,2 +1,2 @@
-web: python app.py
-renderer: phantomjs app.py
+web: python app/app.py
+renderer: phantomjs app/app.py
