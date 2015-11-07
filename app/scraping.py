@@ -11,7 +11,7 @@ import lxml.cssselect
 import os
 from app.dbio import dbiomaker, BukkenSetter
 import yaml as yamllib
-    
+
 def update():
     print("---start update---")
     #新規取得した物件情報を格納
