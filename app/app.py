@@ -7,11 +7,31 @@ from bottle import TEMPLATE_PATH, jinja2_template as template
 import scraping
 import view
 import os
-import asyncio
+from bottle import static_file
 
+#このスクリプトがあるフォルダの絶対パス
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__)) 
 #templateパスの追加
-TEMPLATE_PATH.append("../views")
-ROOT_PATH = os.path.dirname(os.path.abspath(__file__)) #このスクリプトがあるフォルダの絶対パス
+TEMPLATE_PATH.append(ROOT_PATH  + "../views")
+
+@route('/js/<filename>')
+def js_static(filename):
+    return static_file(filename, root='./static/js')
+
+
+@route('/img/<filename>')
+def img_static(filename):
+    return static_file(filename, root='./static/img')
+
+
+@route('/fonts/<filename>')
+def fonts_static(filename):
+    return static_file(filename, root='./static/fonts')
+
+
+@route('/css/<filename>')
+def css_static(filename):
+    return static_file(filename, root='./static/css')
 
 def check(username, password):
     #サーバ側設定値の読み取り

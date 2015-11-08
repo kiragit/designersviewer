@@ -3,28 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>デザイナーズ物件</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
  
-    <link href="dist/css/vendor/bootstrap.min.css" rel="stylesheet">
-    <link href="dist/css/flat-ui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.theme.min.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css" />
  
-    <link rel="shortcut icon" href="img/favicon.ico">
- 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-    <script src="js/vendor/html5shiv.js"></script>
-    <script src="js/vendor/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
   </head>
  
   <body>
  
-    <div class="container">
+    <div>
       {% block content %} {% endblock %}
     </div>
- 
-    <script src="dist/js/vendor/jquery.min.js"></script>
-    <script src="dist/js/vendor/video.js"></script>
-    <script src="dist/js/flat-ui.min.js"></script>
+
   </body>
 </html>
