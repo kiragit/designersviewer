@@ -11,7 +11,7 @@ import lxml.html
 import lxml.cssselect
 import os
 import sys
-from app.dbio import dbiomaker, BukkenSetter
+from dbio import dbiomaker, BukkenSetter
 import yaml as yamllib
 import asyncio
 from os.path import join, dirname
