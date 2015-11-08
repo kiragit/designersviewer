@@ -6,86 +6,79 @@ Created on Sun Oct 18 11:11:55 2015
 """
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import lxml.html
 import lxml.cssselect
 import os
-from app.dbio import dbiomaker, BukkenSetter
+import sys
+from dbio import dbiomaker, BukkenSetter
 import yaml as yamllib
+import asyncio
+from os.path import join, dirname
 
 def update():
     print("---start update---")
+    yamlFileName=["linea.yml","goodroom.yml","Rstore.yml"]
+    URL_PRE=['http://www.linea.co.jp/article/list/pgnum/','http://www.goodrooms.jp/sch/sch_list.php?page_num=2&sort=&=&sch_flg=&item=0&price=0-99999&b_area=0-99999&eki_walk=0&chikunen=0&rs_price=&madori=0&no_r_price=0&no_s_price=0&cond_money_combo=0&kodawari=0&setsubi_cd=0&g_point1=0&g_point2=0&g_point3=0&g_point4=0&g_point5=0&categoly=0&state=&update=&create_date=&pref_cd=0&word=&canonical_url=/sch/sch_list.php?page_num=','http://www.r-store.jp/newarrival/']
+    URL_POST=['/type/rent/pre2/1/','','?odr=5&num=50']
+    future=[asyncio.Future() for x in range(0,3)]
+
+    loop = asyncio.get_event_loop()
+    #task = getBukkensFromWEBSITE(future[1],yamlFileName[1],URL_PRE[1],URL_POST[1],2)
+    #loop.run_until_complete(task)
+    #loop.run_until_complete(asyncio.wait([task1,task2,task3,]))
+    loop.run_until_complete(asyncio.wait([asyncio.ensure_future(getBukkensFromWEBSITE(future[i],yamlFileName[i],URL_PRE[i],URL_POST[i],4)) for i in range(0,3)]))
+    print("---end update---")
+    loop.close()
+
+async def getBukkensFromWEBSITE(future,ymlFileName,URL_GOODROOM_PRE,URL_GOODROOM_RSTORE,pageNum):
     #新規取得した物件情報を格納
     bukkens=[]
     # 物件情報のDBIOインスタンスを作成
     dbio = dbiomaker()
     # yamlファイル格納フォルダパス
-    YAML_FOLDER_PATH="../yml/"
-
-    #linea start
-    #yamlデータ取得    
-    f = open(YAML_FOLDER_PATH+"linea.yml", 'r')
-    yaml = yamllib.load(f)  # 読み込む
-    f.close() 
-    # URL_PRE + ページ番号 + URL_POST　でURLを構成する
-    URL_LINEA_PRE = 'http://www.linea.co.jp/article/list/pgnum/'
-    URL_LINEA_POST = '/type/rent/pre2/1/'
-    #  物件サイトから情報を取得
-    for i in range(1,2):
-        url = URL_LINEA_PRE + str(i) + URL_LINEA_POST
-        print("---getting from "+ url +"---")
-        bukkens.extend(getBukkensFromYamlInPage(yaml,url))
-    #物件情報削除
-    dbio.deleteBySite(yaml["website"])
-    #linea end
-
-    #Rstore start
-    #yamlデータ取得    
-    f = open(YAML_FOLDER_PATH+"Rstore.yml", 'r')
-    yaml = yamllib.load(f)  # 読み込む
-    f.close() 
-    URL_RSTORE_PRE = 'http://www.r-store.jp/newarrival/'
-    URL_RSTORE_RSTORE = '?odr=5&num=50'
-    #  物件サイトから情報を取得
-    for i in range(1,2):
-        url = URL_RSTORE_PRE + str(i) + URL_RSTORE_RSTORE
-        print("---getting from "+ url +"---")
-        bukkens.extend(getBukkensFromYamlInPage(yaml,url))
-    #物件情報削除
-    dbio.deleteBySite(yaml["website"])
-    #Rstore end
-    
-    
-    #good room start
-    #yamlデータ取得    
-    f = open(YAML_FOLDER_PATH+"goodroom.yml", 'r')
+    ROOT_PATH = os.path.dirname(os.path.abspath(__file__)) #このスクリプトがあるフォルダの絶対パス
+    YAML_FOLDER_PATH=ROOT_PATH+"/../yml/"
+    #yamlデータ取得
+    print("--yaml read start--")
+    f = open(YAML_FOLDER_PATH+ymlFileName, 'r')
     yaml = yamllib.load(f)  # 読み込む
     f.close()
-    URL_GOODROOM_PRE = 'http://www.goodrooms.jp/sch/sch_list.php?page_num=2&sort=&=&sch_flg=&item=0&price=0-99999&b_area=0-99999&eki_walk=0&chikunen=0&rs_price=&madori=0&no_r_price=0&no_s_price=0&cond_money_combo=0&kodawari=0&setsubi_cd=0&g_point1=0&g_point2=0&g_point3=0&g_point4=0&g_point5=0&categoly=0&state=&update=&create_date=&pref_cd=0&word=&canonical_url=/sch/sch_list.php?page_num='
-    URL_GOODROOM_RSTORE = ''
-    #  物件サイトから情報を取得
-    for i in range(1,2):
-        url = URL_GOODROOM_PRE + str(i) + URL_GOODROOM_RSTORE
-        print("---getting from "+ url +"---")
-        bukkens.extend(getBukkensFromYamlInPage(yaml,url))
+    print("--yaml read end--")
     #物件情報削除
     dbio.deleteBySite(yaml["website"])
-    #good room end
-    #️DBへ格納
-    dbio.insert(bukkens)
-    print("---end update---")
+    #  物件サイトから情報を取得
+    for i in range(1,pageNum):
+        url = URL_GOODROOM_PRE + str(i) + URL_GOODROOM_RSTORE
+        print("---getting start "+ url +"---")
+        await getBukkensFromYamlInPage(yaml,url)
+    #処理完了通知
+    future.set_result(True)
+    print("---getting done "+ url +"---")
 
-def getBukkensFromYamlInPage(yaml,pageUrl):
-    
+async def getBukkensFromYamlInPage(yaml,pageUrl):
+    # 物件情報のDBIOインスタンスを作成
+    dbio = dbiomaker()    
     # webサイトから取得した物件リストを格納
     bukkens = []
-
     #開発環境と本番環境でPhantomJSの呼び出し方が異なるため、ホスト名で振り分け
     if os.uname()[1] == "kira-no-MacBook-Air.local":
         driver = webdriver.PhantomJS(executable_path='/Applications/phantomjs-1.9.2-macosx/bin/phantomjs')
     else:    
         driver = webdriver.PhantomJS()
+
+    # 新規タブをあけるキー操作を設定
+    newtab=Keys.CONTROL + 't'
+    # Mac かどうかの判定、キーがMac だと違う
+    if sys.platform == 'darwin':
+        newtab=Keys.COMMAND + 't'
+     
     #webサイトからデータ取得
+    print("start driver")
+    #open tab
+    #driver.find_element_by_tag_name('body').send_keys(newtab) 
     driver.get(pageUrl)
+    print("end driver")
     #HTMLは未使用にみえるが、文字列指定の形でevalで使用している
     HTML = lxml.html.fromstring(driver.page_source)
     
@@ -140,7 +133,8 @@ def getBukkensFromYamlInPage(yaml,pageUrl):
                                     #物件情報設定
                                     bukkeninfo = bukkenSetter.getBukkenInfoByDic(bukkenDic)
                                     bukkens.append(bukkeninfo)
-    return bukkens
+    #️DBへ格納
+    dbio.insert(bukkens)
         
 def htmlItemSelector(HTML,p,c,s,h):
     info = ""
@@ -184,6 +178,6 @@ def htmlItemSelector(HTML,p,c,s,h):
     return info
 
 if __name__ == '__main__':
-
     update()
+
     #a=eval("HTML"+"."+BP+'("'+BC+'")'+BS)

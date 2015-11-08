@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import exc #例外処理
 import os
 import re
+from datetime import datetime
 
 #from sqlalchemy.ext.declarative import declarative_base
 # SQLAlchemyお決まりの処理
@@ -46,7 +47,9 @@ bukken_info_table = Table("bukken_info",metadata,
     #コメント
     Column("info",String),
     #検索用家賃
-    Column("yatin_select",Integer)
+    Column("yatin_select",Integer),
+    #検索用家賃
+    Column("updatetime",String)
 )
 metadata.create_all(engine)
 
@@ -73,6 +76,8 @@ class BukkenInfo():
         self.info=info
         #検索用家賃
         self.yatin_select=re.findall(r'[0-9]+', yatin.replace(',', ''))[0]
+        #更新日
+        self.updatetime=datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         
     def __repr__(self):
         return "<BukkenInfo(%s,%s)>" % (self.website,self.name)

@@ -7,6 +7,7 @@ from bottle import TEMPLATE_PATH, jinja2_template as template
 import scraping
 import view
 import os
+import asyncio
 
 #templateパスの追加
 TEMPLATE_PATH.append("../views")
