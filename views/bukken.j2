@@ -1,22 +1,43 @@
 {% extends "base.j2" %}
 
 {% block content %}
+    <script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "itemContainer",
+                previous : "<<",
+                next : ">>",
+                perPage      : 3,//1ページに表示する要素の数
+                startPage    : 1,//初期表示ページ
+                startRange   : 1,//ページネーションの表示設定
+                midRange     : 5,//上に同じ
+                endRange     : 1//上に同じ
+            });
+        });
+    </script>
+    <!-- Item container (doesn't need to be an UL) -->
+    <ul  id="itemContainer" style="list-style:none;">
     {% for bukken in bukkens %}
-        <p>
-            <ul class="list-group">
-                <li class="list-group-item">
+            <li class="list-group">
+                <span class="list-group-item">
                     {% set photolist = bukken.photoURL.split(',') %}
                     {% for photo in photolist %}
                         <img height="82" height="82" src={{photo}} />
                     {% endfor %}
-                </li>
-                <li class="list-group-item"><a href={{ bukken.link }} target=”_blank” >{{ bukken.name }}</a></li>
-                <li class="list-group-item">コメント:{{bukken.info}}</li>
-                <li class="list-group-item">家賃:{{bukken.yatin}}</li>
-                <li class="list-group-item">最寄駅:{{bukken.eki}}</li>
-                <li class="list-group-item">間取り:{{bukken.madori}}</li>
-                <li class="list-group-item"><a href={{ bukken.websiteURL }}>引用元：{{ bukken.website }}</a></li>
-            </ul>
-        </p>
+                </span>
+                <span class="list-group-item"><a href={{ bukken.link }} target=”_blank” >{{ bukken.name }}</a></span>
+                <span class="list-group-item">コメント:{{bukken.info}}</span>
+                <span class="list-group-item">家賃:{{bukken.yatin}}</span>
+                <span class="list-group-item">最寄駅:{{bukken.eki}}</span>
+                <span class="list-group-item">間取り:{{bukken.madori}}</span>
+                <span class="list-group-item"><a href={{ bukken.websiteURL }}>引用元：{{ bukken.website }}</a></span>
+            </li>
     {% endfor %}
+        </ul>
+    <!-- Future navigation panel -->
+    <fotter>
+      <div class="container">
+        <div class="holder"></div>
+      </div>
+    </fotter>
 {% endblock %}

@@ -14,6 +14,24 @@
  
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+
+    <script src="/js/jPages.min.js"></script>
+    <link rel="stylesheet" href="/css/jPages.css">
+    <script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "itemContainer",
+                perPage      : 3,//1ページに表示する要素の数
+                startPage    : 1,//初期表示ページ
+                startRange   : 1,//ページネーションの表示設定
+                midRange     : 5,//上に同じ
+                endRange     : 1//上に同じ
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="/css/mycss.css" />
+
   </head>
  
   <body>
