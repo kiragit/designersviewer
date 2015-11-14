@@ -1,7 +1,14 @@
 PhantomJS is launching GhostDriver...
-[INFO  - 2015-11-08T16:32:08.661Z] GhostDriver - Main - running on port 58425
-[INFO  - 2015-11-08T16:32:08.711Z] Session [41545530-8636-11e5-9ce7-5752fd9e7b70] - _decorateNewWindow - page.settings: {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.2 Safari/534.34","webSecurityEnabled":true}
-[INFO  - 2015-11-08T16:32:08.711Z] Session [41545530-8636-11e5-9ce7-5752fd9e7b70] - page.customHeaders:  - {}
-[INFO  - 2015-11-08T16:32:08.711Z] Session [41545530-8636-11e5-9ce7-5752fd9e7b70] - CONSTRUCTOR - Desired Capabilities: {"javascriptEnabled":true,"version":"","browserName":"phantomjs","platform":"ANY"}
-[INFO  - 2015-11-08T16:32:08.712Z] Session [41545530-8636-11e5-9ce7-5752fd9e7b70] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.2","driverName":"ghostdriver","driverVersion":"1.0.4","platform":"mac-unknown-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2015-11-08T16:32:08.712Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 41545530-8636-11e5-9ce7-5752fd9e7b70
+[INFO  - 2015-11-14T08:56:15.279Z] GhostDriver - Main - running on port 52932
+[INFO  - 2015-11-14T08:56:15.314Z] Session [8fe987d0-8aad-11e5-9242-0f5fe3e4e127] - _decorateNewWindow - page.settings: {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.2 Safari/534.34","webSecurityEnabled":true}
+[INFO  - 2015-11-14T08:56:15.314Z] Session [8fe987d0-8aad-11e5-9242-0f5fe3e4e127] - page.customHeaders:  - {}
+[INFO  - 2015-11-14T08:56:15.314Z] Session [8fe987d0-8aad-11e5-9242-0f5fe3e4e127] - CONSTRUCTOR - Desired Capabilities: {"platform":"ANY","browserName":"phantomjs","javascriptEnabled":true,"version":""}
+[INFO  - 2015-11-14T08:56:15.314Z] Session [8fe987d0-8aad-11e5-9242-0f5fe3e4e127] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.2","driverName":"ghostdriver","driverVersion":"1.0.4","platform":"mac-unknown-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2015-11-14T08:56:15.314Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 8fe987d0-8aad-11e5-9242-0f5fe3e4e127
+[INFO  - 2015-11-14T09:01:15.285Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:06:15.279Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:11:15.279Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:15:33.377Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:20:33.375Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:36:49.030Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2015-11-14T09:41:49.028Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
